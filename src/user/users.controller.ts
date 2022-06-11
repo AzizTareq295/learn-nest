@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -20,8 +20,9 @@ export class UsersController {
   }
 
   @Get('/:id')
-  findOne(@Param() params): Promise<User> {
-    return this.usersService.findOne(params.id);
+  findOne(@Param('id', new ParseIntPipe({errorHttpStatusCode: HttpStatus.BAD_REQUEST})) id: number): Promise<User> {
+    console.log(id)
+    return this.usersService.findOne(id);
   }
 
   @Put('/:id')
