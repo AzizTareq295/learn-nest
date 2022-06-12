@@ -5,9 +5,10 @@ import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { User } from './user/user.entity';
 import { UsersModule } from './user/users.module';
 import { PostModule } from './post/post.module';
+import { ProfileModule } from './profile/profile.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -23,7 +24,11 @@ import { PostModule } from './post/post.module';
     }),
     CatsModule,
     UsersModule,
-    PostModule
+    PostModule,
+    ProfileModule,
+    MulterModule.register({
+      dest: './upload',
+    })
   ],
   controllers: [AppController],
   providers: [AppService],
