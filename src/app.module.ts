@@ -9,6 +9,7 @@ import { UsersModule } from './user/users.module';
 import { PostModule } from './post/post.module';
 import { ProfileModule } from './profile/profile.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { MulterModule } from '@nestjs/platform-express';
     ProfileModule,
     MulterModule.register({
       dest: './upload',
-    })
+    }),
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

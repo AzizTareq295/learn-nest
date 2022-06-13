@@ -27,6 +27,10 @@ export class UsersService {
     return this.usersRepository.findOneBy({ id });
   }
 
+  async loginData(email: string): Promise<User> {
+    return this.usersRepository.findOneBy({ email });
+  }
+
   async updateData(id: number, data: UpdateUserDto): Promise<User> {
     const existantUser = await this.usersRepository.findOneBy({id});
     
