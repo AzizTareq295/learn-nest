@@ -1,13 +1,15 @@
-import { Controller, Get, Post, Redirect, Req, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Redirect, Req, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request } from 'express';
 import { diskStorage } from 'multer';
 import { AppService } from './app.service';
+import { JwtAuthGuard } from './auth/jwt.auth.guard';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   getHello(): object {
     return this.appService.testOne();
